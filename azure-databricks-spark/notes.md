@@ -51,3 +51,20 @@ Cluster pools are used to reduce cluster setting up time. It has vms that are ke
     - notebook workflow utilities - to chain different notebooks together and use one from the other
 - dbutils package is quite helpful, you can access it from all languages like python, scala, R. And write code programmatically, for example, file system can be accessed by dbutils.fs
 - for adhoc tasks we can use magic commands like %fs, but dbutils.fs can be used in jobs or when we're accessing fs methods from within a program.
+
+# Azure Data Lake
+Various forms of authentication available for Azure Data Lake
+- session scoped: only for the duration of the session in a given notebook
+- cluster scoped: at a cluster level, for any notebooks attached to the cluster
+- Azure access directory (AAD) credential
+- Unity catalog
+
+Containers can be thought of as equivalent to folders/directories
+
+### Authentication using access keys
+- When accessing data in ADL from databricks, we need to give one of the 2 access keys to Databricks so it can read the data. This is done by setting up a spark configuration in databricks notebook
+- ABFS driver is used to access data from ADL. use dbutils.fs
+- access keys give full access, so this is not ideal in cases where we want to restrict access to certain users (eg give only read only access). This is when shared access signature tokens come into picture 
+
+### Authenticate using Shared Access Signature (SAS) tokens
+SAS tokens provide more fine grained access to your storage account wrt type of files, permissions, ip address, time period of access etc.
