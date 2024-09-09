@@ -68,3 +68,31 @@ Containers can be thought of as equivalent to folders/directories
 
 ### Authenticate using Shared Access Signature (SAS) tokens
 SAS tokens provide more fine grained access to your storage account wrt type of files, permissions, ip address, time period of access etc.
+
+
+### Authenticate using Service Principle
+- way to go for automated databricks jobs and ci/cd pipelines as they provide better security and monitoring
+- also called Azure AD (Active Directory) application
+- Microsoft entra id in azure portal, client id and tenant id needed from there
+- steps to follow
+    1. Register azure ad application
+    2. Generate secret password for the application
+    3. set spark config with client_id, client_secret, tenant_id
+    4. Assign role 'storage blob data contributor' to data lake
+
+All 3 above methods are session based authentication, we add keys within notebook
+
+### Cluster based authentication
+- when cluster is created, access to dl is secured, all notebooks connected to the cluster can access the dl
+- we can edit spark config at the cluster level, add the access key and then restart the cluster
+
+### AAD Credential Passthrough
+- used in cases when different users require different levels of access
+
+### Key Vault and Secret Scope
+- Databricks Secret Scope + Azure Key Vault can be used to secure secrets
+- Azure Key Vault -> Databricks Secret Scope -> Clusters/Notebooks/Jobs
+- dbutils.secrets can be used in notebooks
+- db secret scope url = homeurl/#secrets/createScope
+
+# Databricks File System (DBFS) and Databricks Mounts
