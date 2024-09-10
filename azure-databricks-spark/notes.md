@@ -96,3 +96,10 @@ All 3 above methods are session based authentication, we add keys within noteboo
 - db secret scope url = homeurl/#secrets/createScope
 
 # Databricks File System (DBFS) and Databricks Mounts
+- DBFS: file system that provides distributed access to data stored in Azure storage.
+- DBFS mount on default Azure Blob storage is called DBFS Root.
+- you can upload files to DBFS filestore dir
+- advantage of filesystem mount like this is that you can read directly using dbutils, without having to provide any authentication details
+- to mount a DL to DBFS
+    - get client keys/secrets using service principle
+    - supply that as parameters and use dbutils.fs.mount
