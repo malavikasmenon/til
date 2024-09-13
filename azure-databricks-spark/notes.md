@@ -95,7 +95,7 @@ All 3 above methods are session based authentication, we add keys within noteboo
 - dbutils.secrets can be used in notebooks
 - db secret scope url = homeurl/#secrets/createScope
 
-# Databricks File System (DBFS) and Databricks Mounts
+### Databricks File System (DBFS) and Databricks Mounts
 - DBFS: file system that provides distributed access to data stored in Azure storage.
 - DBFS mount on default Azure Blob storage is called DBFS Root.
 - you can upload files to DBFS filestore dir
@@ -103,3 +103,11 @@ All 3 above methods are session based authentication, we add keys within noteboo
 - to mount a DL to DBFS
     - get client keys/secrets using service principle
     - supply that as parameters and use dbutils.fs.mount
+
+
+### Ingesting data
+- inferSchema can be set to True and use that to read data, but then 2 spark jobs are created. First time to read the data and infer the schema and second time to actually read the data with the inferred schema. This is not a very efficient process and can slow down the pipeline, hence better to avoid inferSchema. Also if dataset has unexpected values, we want the processes to fail, inferschema may carry on with it even with wrong datatypes.
+
+- structType can be thought of as representing a row and StructField as representing columns
+- StructType is a collection of StructFields
+- current_timestamp spark method can be used for adding time instead of datetime module 
