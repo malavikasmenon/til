@@ -110,4 +110,17 @@ All 3 above methods are session based authentication, we add keys within noteboo
 
 - structType can be thought of as representing a row and StructField as representing columns
 - StructType is a collection of StructFields
-- current_timestamp spark method can be used for adding time instead of datetime module 
+- current_timestamp spark method can be used for adding time instead of datetime module
+
+### Partition By
+- The dataframe writer api has a partitionBy method. We can provide a col to it, which would then partition the data by that col, ie when it is stored to the disk, separate folders will be created for each of the distinct values in the given column.
+- This helps with data parallelization, but you have to be careful in choosing the right col. For eg choosing a col that has only unique values per record would actually lead to a performance drop, so you have to strike the right balance.
+
+### Schema Definition
+
+- DDL style of defining schema
+```
+schema = "id STRING, marks INT"
+```
+- use HIVE datatypes
+- Spark when reading json assumes its single line json by default, so for multi-line json you need to explicitly specify it. so set multiLine to True
