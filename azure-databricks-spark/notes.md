@@ -124,3 +124,4 @@ schema = "id STRING, marks INT"
 ```
 - use HIVE datatypes
 - Spark when reading json assumes its single line json by default, so for multi-line json you need to explicitly specify it. so set multiLine to True
+- To read data split across multiple files into a single df, you can use spark.read as before, but instead of specifying the file name, give the directory name. You can also give wildcards like directory_name/some_patten_*.csv
