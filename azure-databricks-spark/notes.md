@@ -125,3 +125,14 @@ schema = "id STRING, marks INT"
 - use HIVE datatypes
 - Spark when reading json assumes its single line json by default, so for multi-line json you need to explicitly specify it. so set multiLine to True
 - To read data split across multiple files into a single df, you can use spark.read as before, but instead of specifying the file name, give the directory name. You can also give wildcards like directory_name/some_patten_*.csv
+
+### Databricks Workflows
+- Use %run to use one notebook inside another
+- can pass parameters to notebooks by using dbuitls.widgets. You can supply the parameter value during runtime
+- dbutils.notebooks.run and dbutils.notebooks.exit can be used to chain notebooks together and execute them as a workflow using databricks jobs
+- usually db workflows are not used in prodn env as they are very limited in capability and Azure Data Factory is used for the same.
+
+### Spark Filter
+- filter and where can be used interchangeably
+- df.filter("year = 2015") => the sql way of doing. Use "and" to join conditions together like in sql
+- df.filter(df["year"] == 2015) => the pythonic way of doing it. Here we can use &(and) |(or) etc to join conditions together 
