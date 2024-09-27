@@ -136,3 +136,32 @@ schema = "id STRING, marks INT"
 - filter and where can be used interchangeably
 - df.filter("year = 2015") => the sql way of doing. Use "and" to join conditions together like in sql
 - df.filter(df["year"] == 2015) => the pythonic way of doing it. Here we can use &(and) |(or) etc to join conditions together 
+
+### Spark Joins - Types
+- Inner Join : default, tables from both
+- Left Join = Left Outer Join, all values from left, null if those rows dont exist on right
+- Right Join = Right Outer Join, all values from right, null if those rows dont exist on left
+- Full Join = Full Outer Join = All values from both tables, null on either side if rows dont exist on the other table
+- Cross Join = Cartesian product (can lead to oom frequently). resulting table count = count of table 1 * count of table 2. Every row from left table matched with every row from right table. Syntax is slightly different
+```
+a_cross_b = a.crossJoin(b)
+```
+- left semi join = think of product of inner join, but do a distinct and select columns only from the left
+- left anti join = rows from left that dont have a match in the right
+Ref: https://stackoverflow.com/questions/21738784/difference-between-inner-join-and-left-semi-join
+
+### Aggregations
+- Built in aggregate functions like count, count_distinct, sum etc can be used to return 1 single row of aggregate data (without using groupby)
+- Eg df.select(count("*")) would return one row with the total count
+- Multiple aggregations can be done together too, which would become different cols in a single row
+- Eg: df.select(count("*"), sum("marks"))
+- In most scenarios, we don't want just a single record. we want the count of each unique value in a col etc, this is where groupby comes into picture.
+- df.groupBy(name) => this returns a groupedData object, on which aggregations can be performed. So we would have multiple rows with unique values from each col and the result of the corresponding aggregate function
+- When doing aggregations on groupedData object, only one can be done at a time. However there's a method .agg(), using which we can perform multiple aggregations on a groupedData object
+
+### Window Functions
+```
+studentsRankSpec = df.partitionBy("academic_year").orderBy("marks", ascending=False)
+df = df.withColumn("rank", rank().over(studentsRankSpec))
+```
+Rank is an example of a window function, there are several other window functions that can be applied on a partition. Here, we separate the df into partitions based on year, then in each year we find the total marks in descending order and thus a window is created. On this window, we apply the rank function.
