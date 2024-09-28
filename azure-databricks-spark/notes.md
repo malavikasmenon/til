@@ -158,6 +158,7 @@ Ref: https://stackoverflow.com/questions/21738784/difference-between-inner-join-
 - In most scenarios, we don't want just a single record. we want the count of each unique value in a col etc, this is where groupby comes into picture.
 - df.groupBy(name) => this returns a groupedData object, on which aggregations can be performed. So we would have multiple rows with unique values from each col and the result of the corresponding aggregate function
 - When doing aggregations on groupedData object, only one can be done at a time. However there's a method .agg(), using which we can perform multiple aggregations on a groupedData object
+- when() can be used if you want to count only certain rows that satisfy a condition.
 
 ### Window Functions
 ```
