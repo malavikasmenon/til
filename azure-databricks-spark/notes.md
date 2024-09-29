@@ -177,6 +177,15 @@ Rank is an example of a window function, there are several other window function
 - global temp views can be created similarly using createOrReplaceGlobalTempView()
 - To access in sql use global_temp.view
 - To show available tables in databricks, you can use SHOW TABLES (for local) or SHOW TABLES IN global_temp (for global)
+- Few useful spark SQL statements - SHOW, DESCRIBE, USE, current_database()
+- Diff between managed table and external table ->
+    - if you drop the table, data is also dropped in the case of managed, 
+    - but for external even if table is dropped, data remains, just metadata is dropped.
+- df.saveAsTable("table_name") (without specifying a path) would create a managed table, which can then be used for SQL processing
+- df.option("path", "somepath").saveAsTable("table_name") would create an external table, since we specified the path
+- A View is a visual representation on top of a Table
+- Databricks notebook has some visualisation options which can be used to plot charts from a table & create dashboard option to combine these visualisations as well.
+
 
 ### Hive Meta Store
 
@@ -188,3 +197,5 @@ Spark SQL ----->  Hive Meta Store ------> Azure Data Lake
 - There are few options for Hive Meta Store - Databricks default option or an external store like AzureSQL, MySQL etc
 - Spark SQL uses the meta store to apply the schema and access the data
 ![image info](./images/databases.png)
+
+
