@@ -166,3 +166,25 @@ studentsRankSpec = df.partitionBy("academic_year").orderBy("marks", ascending=Fa
 df = df.withColumn("rank", rank().over(studentsRankSpec))
 ```
 Rank is an example of a window function, there are several other window functions that can be applied on a partition. Here, we separate the df into partitions based on year, then in each year we find the total marks in descending order and thus a window is created. On this window, we apply the rank function.
+
+### Spark SQL
+- To access a dataframe from SQL, there are 2 options - temporary view and global view
+- Temp view only valid within a spark session
+- To create a temp view, can either use createTempView or createOrReplaceTempView
+- Eg: df.createTempView(df_view)
+- Once the view is created, can be accessed using sql, from either sql directly (on a db notebook %sql) or through python using spark.sql()
+- Global temp view is accessible from the entire application, ie from a databricks cluster
+- global temp views can be created similarly using createOrReplaceGlobalTempView()
+- To access in sql use global_temp.view
+- To show available tables in databricks, you can use SHOW TABLES (for local) or SHOW TABLES IN global_temp (for global)
+
+### Hive Meta Store
+
+Spark SQL ----->  Hive Meta Store ------> Azure Data Lake
+
+- Azure DL stores the actual data objects, Hive Meta Store helps spark sql access these by storing the metadata that enables spark sql to access this data as tables & columns. 
+- Metadata can include things like location of the file, format of the columns etc
+- Meta store is essentially a storage for the metadata about the data files
+- There are few options for Hive Meta Store - Databricks default option or an external store like AzureSQL, MySQL etc
+- Spark SQL uses the meta store to apply the schema and access the data
+![image info](./images/databases.png)
