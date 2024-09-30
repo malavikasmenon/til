@@ -199,3 +199,12 @@ Spark SQL ----->  Hive Meta Store ------> Azure Data Lake
 ![image info](./images/databases.png)
 
 
+### Data Loading Patterns
+- Full Load: When the entire data is provided by the source
+- Incremental Load: When only the changes since the last load are provided by the source
+- In real world projects, there could be a hybrid approach followed where we receive incremntal but process fully or vice versa.
+- History File/Cutover File: The file that contains the entire historical data
+- Delta File: File that contains only the new changes
+- "append" mode can be used instead of "overwrite" in df.write scenarios
+- Azure Data Lake doesnt have delta lake's merge capabilities, alter/drop partitions come in handy for incremental loads
+
