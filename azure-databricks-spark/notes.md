@@ -208,3 +208,12 @@ Spark SQL ----->  Hive Meta Store ------> Azure Data Lake
 - "append" mode can be used instead of "overwrite" in df.write scenarios
 - Azure Data Lake doesnt have delta lake's merge capabilities, alter/drop partitions come in handy for incremental loads
 
+
+### Delta Lakes
+- Originally developed by Databricks then open-sourced under Linux Foundation
+- Run on top of Data Lakes and are compatible with Spark API
+- provides acid transactions, scaleable metadata handling and unifies streaming and batch workloads.
+- data warehouse had many pitfalls which led to adaption of data lakes. Delta lakes were introduced to deal with the pitfalls of data lakes which included no support for acid transactions, no support for partitioning, poor performance with interactive queries, no versioning etc. 
+- Key difference between data lake and delta lake is that delta lake has a transaction log file on top of the parquet file. This allows versioning, history, enabling acid transactions etc. It also has a spark engine on top which helps with processing history easier too.
+
+
