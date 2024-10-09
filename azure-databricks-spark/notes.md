@@ -215,5 +215,7 @@ Spark SQL ----->  Hive Meta Store ------> Azure Data Lake
 - provides acid transactions, scaleable metadata handling and unifies streaming and batch workloads.
 - data warehouse had many pitfalls which led to adaption of data lakes. Delta lakes were introduced to deal with the pitfalls of data lakes which included no support for acid transactions, no support for partitioning, poor performance with interactive queries, no versioning etc. 
 - Key difference between data lake and delta lake is that delta lake has a transaction log file on top of the parquet file. This allows versioning, history, enabling acid transactions etc. It also has a spark engine on top which helps with processing history easier too.
-
+- partition while saving would create corresponding folders according to the different values available for the partitioning column.
+- deltaTable.update() can be used to modify data in the delta table, similarly deltaTable.deletes() for deletions
+- upsert = merge + update + delete
 
