@@ -218,4 +218,13 @@ Spark SQL ----->  Hive Meta Store ------> Azure Data Lake
 - partition while saving would create corresponding folders according to the different values available for the partitioning column.
 - deltaTable.update() can be used to modify data in the delta table, similarly deltaTable.deletes() for deletions
 - upsert = merge + update + delete
+- vacuum can be used to delete the historical data (if you need to comply with some legal requirements etc). But by default vaccum retains data from the past 7 days.
+- if you need to delete that as well, you can set retention period to 0, to delete the recent data as well. You will have to change a settings variable as well to enable this
+- History and versioning are useful features, you can look back at data of certain versions/time-stamps, and you can also restore the data to be reflected in the current table.
 
+### Delta Lake Transaction Logs
+- For every DML operation on delta-lake, a new JSON file is created in the transaction log. This json file contains important information such as timestamp, what operation was done, what parquet files you should read to get the data and so on
+- For each version, there should be a corresponding transaction log JSON file, if there are many transaction files, checkpoint files are created so DL doesnt have to read all previous JSON files
+- By default, transaction logs are deleted after 30 days.
+- Whenever we write data, parquet files are created for each version as well. 
+- So the flow is, if you say you want to read the latest data, it would go to the most recent JSON file in the transaction log, read the parquet file mentioned there and prev parquet files mentioned before (if any) and then return that data.
