@@ -236,3 +236,11 @@ Spark SQL ----->  Hive Meta Store ------> Azure Data Lake
 - It also provides connectors to many different types of sources, making ingestion quite easy here. For example, Office 365 too. 
 - But it's not a good candidate for streaming workloads, or database migration, data storage or complex data transformations.
 - Provides good logging and visibility.
+
+### Unity catalog
+- Data governance solution offered on Azure.
+- Data governance deals with the privacy, integrity, security of the data etc. For example
+    - Ensure only those that require it have access to the data
+    - Be able to trace back to the source of the data
+    - Follow guidelines like GDPR, CCPA etc 
+- Broadly unity catalog provides the following functions - Data Access, Data Audit, Data Lineage, Data Discoverability
