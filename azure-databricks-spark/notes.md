@@ -246,3 +246,7 @@ Spark SQL ----->  Hive Meta Store ------> Azure Data Lake
     - Be able to trace back to the source of the data
     - Follow guidelines like GDPR, CCPA etc 
 - Broadly unity catalog provides the following functions - Data Access, Data Audit, Data Lineage, Data Discoverability
+
+### Reference
+
+Udemy Course: https://www.udemy.com/course/azure-databricks-spark-core-for-data-engineers/learn/
