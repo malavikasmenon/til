@@ -1,3 +1,5 @@
+# Notes
+
 - Azure databricks is made up of 3 components
     - Apache Spark (open source)
     - Databricks (company created by founders of spark to make managing spark more easier)
@@ -9,7 +11,7 @@
 
 - All 3 major cloud providers - Azure, GCP, AWS has Databricks integration. But Azure is supposed to offer a deeper intergration and offers it as a first party service, also with unified billing and support. 
 
-# Databricks Clusters
+### Databricks Clusters
 
 Cluster = collection of virtual machines with a driver node and worker nodes. 
 
@@ -38,7 +40,7 @@ Options for cluster configuration
 
 Cluster pools are used to reduce cluster setting up time. It has vms that are kept aside previously which can be allocated faster. Min and max number of vms are used.
 
-# Databricks Notebooks
+### Databricks Notebooks
 - Notebook - a collection of cells that run commands on a databricks cluster
 - While creating a notebook, you need to attach it to a cluster where the commands can run
 - One notebook can have multiple languages from python, scala, sql, R
@@ -52,7 +54,7 @@ Cluster pools are used to reduce cluster setting up time. It has vms that are ke
 - dbutils package is quite helpful, you can access it from all languages like python, scala, R. And write code programmatically, for example, file system can be accessed by dbutils.fs
 - for adhoc tasks we can use magic commands like %fs, but dbutils.fs can be used in jobs or when we're accessing fs methods from within a program.
 
-# Azure Data Lake
+### Azure Data Lake
 Various forms of authentication available for Azure Data Lake
 - session scoped: only for the duration of the session in a given notebook
 - cluster scoped: at a cluster level, for any notebooks attached to the cluster
