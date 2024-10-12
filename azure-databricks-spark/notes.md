@@ -228,3 +228,11 @@ Spark SQL ----->  Hive Meta Store ------> Azure Data Lake
 - By default, transaction logs are deleted after 30 days.
 - Whenever we write data, parquet files are created for each version as well. 
 - So the flow is, if you say you want to read the latest data, it would go to the most recent JSON file in the transaction log, read the parquet file mentioned there and prev parquet files mentioned before (if any) and then return that data.
+
+
+### Azure Data Factory
+- Interesting tool for ingestion, transformation of data and running pipelines at scheduled intervals.
+- It runs on Azure cloud, we don't have to worry about vms, or managing infrastructure for scaling up. 
+- It also provides connectors to many different types of sources, making ingestion quite easy here. For example, Office 365 too. 
+- But it's not a good candidate for streaming workloads, or database migration, data storage or complex data transformations.
+- Provides good logging and visibility.
